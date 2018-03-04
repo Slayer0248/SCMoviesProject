@@ -1,0 +1,17 @@
+<h2>My Movies</h2>
+<div *ngIf="!this.addingList">
+   <span><button (click)="toggleAddToList()">Add Movie</button></span>
+</div>
+<div *ngIf="this.addingList">
+   <span>Movie Name:<input type="text" name="moviename"><button>Add</button><button (click)="toggleAddToList()">Cancel</button></span>
+</div>
+<ul class="movies">
+  <li *ngFor="let movie of movies"
+      [class.selected]="movie === selectedMovie"
+      (click)="onSelect(movie)">
+    <span class="badge">{{movie.id}}</span> {{movie.name}}
+    <span class="selectedMovie" *ngIf="movie === selectedMovie">
+        <button>Edit Movie Name</button><button>Delete Movie</button>
+    </span>
+  </li>
+</ul>

@@ -1,0 +1,13 @@
+//todo do
+
+/* do movielist endpoints
+ * hook up to angular front end
+ * autocomplete functionality
+ * post to github
+ */
+
+
+CREATE DATABASE scmoviesdb;
+
+CREATE TABLE MovieLists ( ListID int(11) NOT NULL AUTO_INCREMENT, ListName varchar(255), PRIMARY KEY (ListID));
+CREATE TABLE Movies (MovieID int(11) NOT NULL AUTO_INCREMENT, ListID int(11), Name varchar(255), PRIMARY KEY (MovieID), FOREIGN KEY (ListID) references MovieLists (ListID) on delete cascade);

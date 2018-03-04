@@ -1,0 +1,21 @@
+<h2>My Lists</h2>
+<button (click)="getLists()">Get List</button>
+<div *ngIf="!this.addingList">
+
+   <span><button (click)="toggleAddToList()">Add List</button></span>
+</div>
+<div *ngIf="this.addingList">
+   <span>List Name:<input [(ngModel)]="listname" name="listname" type="text"><button (click)="addList()">Add</button><button (click)="toggleAddToList()">Cancel</button></span>
+</div>
+<ul class="movieLists">
+  <li *ngFor="let list of movieLists | async"
+      [class.selected]="list === selectedList"
+      (click)="onSelect(list)">
+    <span class="badge">{{list.ListID}}</span> {{list.ListName}} <br>
+    <span class="selectedList" *ngIf="list === selectedList">
+        <button>Edit List Name</button><button>Delete List</button><br>
+        <app-movie [listId]="list.id"></app-movie>
+    </span>
+
+  </li>
+</ul>
