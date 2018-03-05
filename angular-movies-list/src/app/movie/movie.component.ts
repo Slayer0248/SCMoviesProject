@@ -17,8 +17,8 @@ export class MovieComponent implements OnInit {
   };
 
   @Input() listId: any;
-  addingList = false;
-  updatingList = false;
+  addingMovie = false;
+  updatingMovie = false;
   movies = this.http.get('http://localhost:8888/SCMoviesProject/backend/movie/readAll.php?id='+this.listId);
   selectedMovie : Movie;
 
@@ -37,12 +37,12 @@ export class MovieComponent implements OnInit {
      this.selectedMovie = movie;
   }
 
-  toggleAddToList(): void {
-     this.addingList = !this.addingList;
+  toggleAddMovie(): void {
+     this.addingMovie = !this.addingMovie;
   }
 
-  toggleUpdateList(): void {
-     this.updatingList = !this.updatingList;
+  toggleUpdateMovie(): void {
+     this.updatingMovie = !this.updatingMovie;
   }
 
   addMovie(text: string) {
@@ -55,23 +55,23 @@ export class MovieComponent implements OnInit {
            name: text
         }
 
-        this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movie/create.php', { data });
+        this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movie/create.php', data );
 
         console.log(this.testVal);
-        this.toggleAddToList();
+        this.toggleAddMovie();
         window.location.reload();
      }
   }
 
-  deleteMovie(data: Movie) {
-     this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/delete.php', { data });
+  deleteMovie() {
+     this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/delete.php', this.selectedMovie );
 
      console.log(this.testVal);
      this.selectedMovie = null;
      window.location.reload();
   }
 
-  updateList(text: string) {
+  updateMovie(text: string) {
 
 
      if (text != this.selectedMovie.name) {
@@ -82,10 +82,10 @@ export class MovieComponent implements OnInit {
            name: text
         }
 
-        this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/update.php', { data });
+        this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/update.php', data);
 
         console.log(this.testVal);
-        this.toggleUpdateList();
+        this.toggleUpdateMovie();
         window.location.reload();
      }
   }

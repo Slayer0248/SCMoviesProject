@@ -13,7 +13,12 @@
       (click)="onSelect(list)">
     <span class="badge">{{list.ListID}}</span> {{list.ListName}} <br>
     <span class="selectedList" *ngIf="list === selectedList">
-        <button>Edit List Name</button><button>Delete List</button><br>
+        <div *ngIf="!this.updatingList">
+           <span><button (click)="toggleUpdateList()">Edit List Name</button><button (click)="deleteList()">Delete List</button></span>
+        </div>
+        <div *ngIf="this.updatingList">
+            <span>List Name:<input [(ngModel)]="listname" name="listname" type="text"><button (click)="updateList(listname)">Update</button><button (click)="toggleUpdateList()">Cancel</button></span>
+        </div>
         <app-movie [listId]="list.id"></app-movie>
     </span>
 
