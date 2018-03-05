@@ -26,6 +26,7 @@ export class MovieComponent implements OnInit {
 
   movieAPIResults:any;
   inputSuggestionList:any;
+  moviename:string;
 
 
   constructor(private http: HttpClient) { }
@@ -104,12 +105,11 @@ export class MovieComponent implements OnInit {
        this.inputSuggestionList[i] = this.movieAPIResults.Search[i].Title;
     }
 
-
-    return this.inputSuggestionList;
   }
 
   getMovieTrailerLink() {
     this.movieAPIResults = JSON.parse(this.http.get('http://www.omdbapi.com/?s='+text+'&r=json&apikey=6602feb')).Search[1].imdbID;
     return "https://www.imdb.com/title/" +this.movieAPIResults+"/";
   }
+
 }

@@ -62,7 +62,7 @@ export class MovieListComponent implements OnInit {
   }
 
   deleteList(data: MovieList) {
-     this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/delete.php', { data });
+     this.testVal = this.http.post('http://localhost:8888/SCMoviesProject/backend/movieList/delete.php', data );
 
      console.log(this.testVal);
      this.selectedList = null;

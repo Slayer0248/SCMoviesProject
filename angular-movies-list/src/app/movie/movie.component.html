@@ -3,10 +3,14 @@
    <span><button (click)="toggleAddMovie()">Add Movie</button></span>
 </div>
 <div *ngIf="this.addingMovie">
-   <span>Movie Name:<input [(ngModel)]="moviename" type="text" name="moviename"><button (click)="addMovie(moviename)">Add</button><button (click)="toggleAddMovie()">Cancel</button></span>
+   <span>Movie Name:<input [(ngModel)]="moviename" (keyup)="getTitleSuggestions(moviename)" type="text" name="moviename">
+   <ul>
+      <li ng-repeat="name in inputSuggestionList"></li>
+   </ul>
+   <button (click)="addMovie(moviename)">Add</button><button (click)="toggleAddMovie()">Cancel</button></span>
 </div>
 <ul class="movies">
-  <li *ngFor="let movie of movies"
+  <li *ngFor="let movie of movies | async"
       [class.selected]="movie === selectedMovie"
       (click)="onSelect(movie)">
     <span class="badge">{{movie.id}}</span> {{movie.name}}
@@ -17,6 +21,7 @@
         <div *ngIf="this.updatingMovie">
             <span>Movie Name:<input [(ngModel)]="moviename" type="text" name="moviename"><button (click)="updateMovie(moviename)">Update</button><button (click)="toggleUpdateMovie()">Cancel</button></span>
         </div>
+        <a ng-href="getMovieTrailerLink()"></a>
     </span>
   </li>
 </ul>
